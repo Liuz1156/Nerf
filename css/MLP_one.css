@@ -1,0 +1,60 @@
+#body{
+	margin: 0%;
+	padding: 0%;
+	align-content: center;
+	justify-content: center;
+	
+}
+
+#card {
+	margin: auto ;
+	margin-top: 5%;
+	width: 80%;
+	height: 60%;
+	transition: all 0.2s;
+	align-content: center;
+	justify-content: center;
+  }
+
+#card:hover {
+transform: scale(1.04) rotate(1deg);
+}
+
+#main{
+	display: flex;
+	padding: 5ch;
+	align-content: center;
+	justify-content: center;
+	background: rgba(255,255,255,.05);
+	box-shadow: 0 0 10px rgba(0,0,0,0.25);
+	backdrop-filter: blur(10px);
+	border-radius: 8px;
+	height: 60ch;
+}
+
+#text1{
+	margin :20px 0 0 40px; 
+	font-size:4ch;
+	text-align: left;
+}
+
+#text2{
+	margin :40px 0 0 40px;
+	font-size:2ch;
+	width: 60%;
+	text-align: left;
+}
+
+#left{
+	width: 50%;
+	display: block;
+}
+
+#rihgt{
+	width: 50%;
+	align-content: center;
+	justify-content: center;
+}
+#ig{
+	width: 10px;
+}

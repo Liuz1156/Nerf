@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Touchable 3D Cube</title>
+  <style>
+    html {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      position: relative;
+      padding: 0;
+      height: 100%;
+      margin: 0;
+      background-color: #d9e1e8;
+      perspective: 800px;
+    }
+
+    .cube {
+      box-shadow: 0 0 20px 10px rgba(255, 255, 0, 0.7) inset;
+      position: relative;
+      top: 30%;
+      left: 30%;
+      width: 200px;
+      height: 200px;
+      transform-style: preserve-3d;
+      transform: rotateX(20deg) rotateY(30deg);
+      transition: transform 0.5s ease;
+    }
+
+    .face {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      opacity: 0.8;
+      border: 1px solid black;
+    }
+
+    .front {
+      transform: translateZ(100px);
+      background-color: red;
+    }
+
+    .back {
+      transform: translateZ(-100px) rotateY(180deg);
+      background-color: blue;
+    }
+
+    .left {
+      transform: rotateY(-90deg) translateZ(100px);
+      background-color: green;
+    }
+
+    .right {
+      transform: rotateY(90deg) translateZ(100px);
+      background-color: yellow;
+    }
+
+    .top {
+      transform: rotateX(90deg) translateZ(100px);
+      background-color: orange;
+    }
+
+    .bottom {
+      transform: rotateX(-90deg) translateZ(100px);
+      background-color: purple;
+    }
+
+    .cube:hover {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+  </style>
+</head>
+<body>
+<div class="cube">
+  <div class="face front"></div>
+  <div class="face back"></div>
+  <div class="face left"></div>
+  <div class="face right"></div>
+  <div class="face top"></div>
+  <div class="face bottom"></div>
+</div>
+</body>
+</html>

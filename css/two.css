@@ -1,0 +1,194 @@
+/* The page occupies 100% of the screen */
+html {
+    height: 100%;
+    width: 100%;
+}
+
+/* The content occupies the entire space available */
+body {
+    position: relative;
+    padding: 0;
+    height: 100%;
+    margin: 0;
+    background-color: #dfe3e8;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*Transform the page into a 2-column grid */
+
+#main{
+    display: grid;
+    position: absolute;
+    left: 7%;
+    align-content: center;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 80%;
+    height: 80%;
+}
+.card {
+    position: relative;
+    top: 10%;
+    left: 10%;
+    padding: 0.5rem;
+    background: #8B91ab;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+    border-left: 2px  rgba(255, 255, 255, 0.545) outset;
+    box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+    overflow: hidden;
+    color: white;
+    transition: all 0.5s ease;
+    gap: 5px;
+}
+#im{
+    display: flex;
+}
+.card:hover {
+    transform: scaleX(1.4) scaleY(1.5) ;
+    z-index: 2;
+    background: #95c4db;
+}
+
+#main:hover .card:not(:hover) {
+    transform: scale(0.8);
+}
+
+.card img{
+    /*flex:1;*/
+    margin: 0;
+    width: 200px; /* 设置图片宽度 */
+    height: auto; /* 保持高度自适应 */
+    border: 1px solid #ccc; /* 设置边框样式 */
+    border-radius: 5px; /* 设置边框圆角 */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    /*display: block; !* 将图片显示为块级元素 *!*/
+    margin-left: 10px; /* 水平居中 */
+    /*margin-right: auto; !* 水平居中 *!*/
+    opacity: 0.8; /* 设置透明度，取值范围为0（完全透明）到1（完全不透明） */
+    transition: transform 0.3s ease; /* 添加过渡动画效果 */
+}
+
+.card img:hover {
+    transform: scale(1.2); /* 鼠标悬停时放大图片 */
+}
+
+.align {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-self: flex-start;
+}
+
+.red {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff605c;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+}
+
+.yellow {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ffbd44;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+}
+
+.green {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #00ca4e;
+    box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.280);
+}
+
+.card h1 {
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+    color: #282c37;
+    text-shadow: -5px 3px 5px rgba(0, 0, 0, 0.4);
+}
+
+#but{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+}
+.Btn {
+    /*opacity: 0.95;*/
+    top: 3%;
+    left: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: #95c4db;
+}
+
+/* plus sign */
+.sign {
+    rotate: 180deg;
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign svg {
+    width: 17px;
+}
+
+.sign svg path {
+    fill: white;
+}
+/* text */
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+    transform: translate(2px ,2px);
+}
+
+
