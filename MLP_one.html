@@ -6,25 +6,110 @@
 		<link rel="stylesheet" href="css/MLP_one.css" type="text/css">
 	</head>
 	<body>
+	<div id="but">
+		<button class="Btn" onclick="window.location.href = 'two.html';">
+
+			<div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+
+			<div class="text">go back</div>
+		</button>
+		<button class="Btn" id="b2" onclick="window.location.href = 'MLP_one.html';">
+
+			<div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+
+			<div class="text">next</div>
+		</button>
+	</div>
+	<div id="test">
+		<div id="example">
+			<img src="img/test01.jpg">
+		</div>
+		<div id="content">
+			<div id="column1">
+				<div id="circle11"></div>
+				<div id="circle12"></div>
+				<div id="circle13"></div>
+				<div id="circle14"></div>
+			</div>
+			<div id="column2">
+
+				<div id="circle21"></div>
+				<div id="circle22"></div>
+				<div id="circle23"></div>
+			</div>
+			<div id="column3">
+				<div id="circle31"></div>
+				<div id="circle32"></div>
+			</div>
+		</div>
+		<div id="result">
+			<div class="card">
+				<div id="header"></div>
+				<div class="info">
+					<p class="title">How to make this material card ?</p>
+					<div id="ss">
+						<div class="slider">
+							<div class="slider-label">
+								<span>质地平滑</span>
+								<span>粗糙</span>
+							</div>
+							<div class="slider-thumb"></div>
+						</div>
+
+						<div class="slider">
+							<div class="slider-label">
+								<span>颜色冷色</span>
+								<span>暖色</span>
+							</div>
+							<div class="slider-thumb"></div>
+						</div>
+
+						<div class="slider">
+							<div class="slider-label">
+								<span>形状简单</span>
+								<span>复杂</span>
+							</div>
+							<div class="slider-thumb"></div>
+						</div>
+
+						<div class="slider">
+							<div class="slider-label">
+								<span>尺寸小</span>
+								<span>大</span>
+							</div>
+							<div class="slider-thumb"></div>
+						</div>
+					</div>
+
+				</div>
+				<div class="footer">
+					<p class="tag">智能识别 </p>
+					<button type="button" class="action" id="ai">start </button>
+				</div>
+			</div>
+		</div>
+	</div>
 		<div id="card">
-			<div class="circle"></div>
-    		<div class="circle"></div>
 			<div id="main">
 				<div id="left">
 					<p id="text1">多层感知机（MLP）简介</p>
 					<p id="text2">
-						<p>MLP（多层感知器模型）是一种简单的神经网络，是人工智能最早的模型。</p>
-						<p>最典型的MLP包括三层：输入层，隐层、和输出层，第一层称为输入层</p>
-						<p>最后一层称为输出层，中间的层称为隐层，MLP神经网络不同层之间是全连接的</p>
-						<p>（即上一层的任意一个神经元与下一层的所有神经元都有连接）</p>
-						<p>它并没有限制隐层的数量，对于输出层神经元的个数也没有限制</p>
-						<p>可以根据各自的需求选择合适的隐层层数</p>
+						<p>我们可以把MLP想象成一个智能的大脑，它能够学习和识别不同类型的水果。</p>
+						<p>当我们给MLP展示一张水果的图片，比如一个苹果。</p>
+						<p>MLP的第一层就会像人脑一样发现图片里的水果是一个<span style="color: #2b90d9; font-weight: bold">平滑的红色圆球</span></p>
+						<p><span style="color: #2b90d9; font-weight: bold">平滑、红色、圆球</span>就是MLP第一层输入的特征，
+						在计算机中可能表示为<span style="color: #2b90d9; font-weight: bold">[0.9,#FF0000,0]</span></p>
+						<p>第二层这个智能大脑就会根据<span style="color: #2b90d9; font-weight: bold">以往判断的准确率</span>来修改每项特征的权重</p>
+						<p>可能它会认为这个水果是否平滑对它的结果并不重要，这一切取决与智能大脑<span style="color: #2b90d9; font-weight: bold">自己的判断</span></p>
+						<p>最后，MLP的第三层就是输出层，它会告诉我们最终的分类结果</p>
 				    </p>
 				</div>
 				<div id="right">
-					<img src="img/test.png">
+					<img src="img/MLP01.gif">
 				</div>
 			</div>
 		</div>
 	</body>
+<script src="js/MLP_one.js"></script>
+
 </html>
