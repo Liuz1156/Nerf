@@ -30,6 +30,20 @@ function draw1(){
         }
 
     }
+    var c1 = document.querySelector("#column1");
+
+    var divs = c1.querySelectorAll("div");
+
+    divs.forEach(function(div) {
+        div.style.backgroundColor = "#a7eaea"; // 设置背景颜色为红色，您可以根据需要更改颜色值
+    });
+    var c2 = document.querySelector("#column2");
+
+    var divs2 = c2.querySelectorAll("div");
+
+    divs2.forEach(function(div2) {
+        div2.style.backgroundColor = "#4eeec6"; // 设置背景颜色为红色，您可以根据需要更改颜色值
+    });
 }
 function draw2(){
     for (var a = 0; a < column2Circles.length; a++) {
@@ -44,6 +58,13 @@ function draw2(){
         }
 
     }
+    var c3 = document.querySelector("#column3");
+
+    var divs = c3.querySelectorAll("div");
+
+    divs.forEach(function(div) {
+        div.style.backgroundColor = "#faedae"; // 设置背景颜色为红色，您可以根据需要更改颜色值
+    });
 }
 
 // -------------------------------------- 画线的两个核心函数
@@ -189,7 +210,7 @@ sliders.forEach(function(slider, index) {
             total = sliderValues.get(0)+ sliderValues.get(1)+ sliderValues.get(2)+sliderValues.get(3);
             console.log("total: "+total);
         }else {
-            console.warn("请输入所有特征值！")
+            // alert("请输入所有特征值！")
         }
     }
 });
@@ -203,17 +224,38 @@ var ai = document.getElementById("ai");
 var header = document.getElementById("header")
 
 ai.addEventListener("click", async function () {
-    if (total !== 0) {
-        draw1();
-        await sleep(1000); // 等待1秒钟
-        draw2();
-        if (total >= 200){
-            console.log("020202")
-            header.style.backgroundImage = "url('img/test02.jpg')"
-        }else {
-            header.style.backgroundImage = "url('img/test01.jpg')"
+    if (sliderValues.size != sliders.length){
+        alert("请输入所有特征值！");
+    }else {
+        if (total !== 0) {
+            draw1();
+            await sleep(1000); // 等待1秒钟
+            draw2();
+            if (total >= 200){
+                console.log("020202")
+                header.style.backgroundImage = "url('/img/test01_s.jpg')"
+            }else {
+                console.log("01111111111")
+                header.style.backgroundImage = "url('/img/test02_s.jpg')"
+            }
         }
     }
 })
+
+window.onload = function (){
+    // 获取图片元素
+    var imageElement = document.getElementById('ex');
+
+// 图片列表
+    var imageList = ['test01.jpg', 'test02.jpg'];
+
+// 随机选择一张图片
+    var randomIndex = Math.floor(Math.random() * imageList.length);
+    var randomImage = imageList[randomIndex];
+
+// 设置图片的 src 属性
+    imageElement.src = "img/"+randomImage;
+
+}
 
 

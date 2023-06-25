@@ -53,10 +53,7 @@ model-viewer {
 }
 
 .container-button {
-    position: absolute;
-    top: 100px;
-    left: 50px;
-    display: grid;
+
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "bt-1 bt-2 bt-3"

@@ -22,7 +22,8 @@ body {
     height: 100%;
     flex-direction: column;
 }
-#text{
+
+#text {
     font-size: 20px;
     /*word-spacing: 50px;*/
     width: 100%;
@@ -35,9 +36,11 @@ body {
     /*border: 3px solid green;*/
     padding: 20px;
 }
-h1{
+
+h1 {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
+
 #under1 {
     margin: 0 auto;
     width: 70%;
@@ -46,22 +49,32 @@ h1{
     justify-content: space-between;
 }
 
-#img{
+#img {
     display: flex;
     width: 100%;
     margin: 80px auto;
 }
-#img img{
+
+#img img {
     margin: 0 auto;
-    width: 450px; /* 设置图片宽度 */
-    height: 350px; /* 保持高度自适应 */
-    border: 1px solid #ccc; /* 设置边框样式 */
-    border-radius: 5px; /* 设置边框圆角 */
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
-    display: block; /* 将图片显示为块级元素 */
-    opacity: 0.8; /* 设置透明度，取值范围为0（完全透明）到1（完全不透明） */
-    transition: transform 0.3s ease; /* 添加过渡动画效果 */
+    width: 450px;
+    /* 设置图片宽度 */
+    height: 350px;
+    /* 保持高度自适应 */
+    border: 1px solid #ccc;
+    /* 设置边框样式 */
+    border-radius: 5px;
+    /* 设置边框圆角 */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    /* 添加阴影效果 */
+    display: block;
+    /* 将图片显示为块级元素 */
+    opacity: 0.8;
+    /* 设置透明度，取值范围为0（完全透明）到1（完全不透明） */
+    transition: transform 0.3s ease;
+    /* 添加过渡动画效果 */
 }
+
 .Btn {
     /*opacity: 0.95;*/
     top: 3%;
@@ -98,6 +111,7 @@ h1{
 .sign svg path {
     fill: white;
 }
+
 /* text */
 .text {
     position: absolute;
@@ -109,6 +123,7 @@ h1{
     font-weight: 600;
     transition-duration: .3s;
 }
+
 /* hover effect on button width */
 .Btn:hover {
     width: 125px;
@@ -121,6 +136,7 @@ h1{
     transition-duration: .3s;
     padding-left: 20px;
 }
+
 /* hover effect button's text */
 .Btn:hover .text {
     opacity: 1;
@@ -128,28 +144,33 @@ h1{
     transition-duration: .3s;
     padding-right: 10px;
 }
+
 /* button click effect*/
 .Btn:active {
-    transform: translate(2px ,2px);
+    transform: translate(2px, 2px);
 }
-#but{
+
+#but {
     width: 98%;
     /*border: 2px solid red;*/
     margin: 0 auto;
     justify-content: space-between;
     display: flex;
 }
+
 #b2:active {
-    transform: translate(-2px ,2px);
+    transform: translate(-2px, 2px);
 }
+
 #b2 .sign {
     rotate: 0deg;
 }
+
 .button {
     position: relative;
     border: none;
-    color: #e8e8e8;
-    background: #333333;
+    color: #333333;
+    background: #33333300;
     font-weight: 600;
     font-size: 20px;
     text-transform: uppercase;
@@ -210,7 +231,3 @@ h1{
 .button:active {
     box-shadow: none;
 }
-
-
-
-
