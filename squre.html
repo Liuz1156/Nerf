@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NERF三维重建技术介绍</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #333333;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .control-label {
+            margin-bottom: 10px;
+        }
+
+        .control-input {
+            width: 200px;
+        }
+
+        .result {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .result-text {
+            font-weight: bold;
+        }
+
+        .render-output {
+            width: 400px;
+            margin: auto;
+            height: 300px;
+            margin-top: 20px;
+            border: 1px solid #cccccc;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>NERF三维重建技术介绍</h1>
+        <div class="content">
+            <h2>简介</h2>
+            <p>
+                NERF（Neural Radiance Fields）是一种基于神经网络的三维重建技术，它可以从不同视角的图像中恢复场景的三维几何结构和外观信息。
+                NERF使用深度学习模型来估计场景中每个3D点的颜色和密度，从而创建高质量的三维重建结果。
+            </p>
+        </div>
+        <div class="interactive">
+            <h2>交互演示</h2>
+            <p>
+                使用下面的控件调整NERF的参数并观察结果。
+            </p>
+            <div class="controls">
+                <label for="theta" class="control-label">旋转角度：</label>
+                <input type="range" id="theta" min="160" max="200" step="1" value="180" class="control-input">
+                <label for="phi" class="control-label">俯仰角度：</label>
+                <input type="range" id="phi" min="-5" max="22" step="1" value="0" class="control-input">
+                <label for="fov" class="control-label">视场角：</label>
+                <input type="range" id="fov" min="20" max="50" step="1" value="50" class="control-input">
+            </div>
+            <div class="result">
+                <span class="result-text">渲染结果 - theta: 0，phi: 0，fov: 60</span>
+            </div>
+            <div class="render-output" id="renderOutput"></div>
+        </div>
+    </div>
+    <script>
+        // 获取HTML元素
+        const thetaInput = document.getElementById('theta');
+        const phiInput = document.getElementById('phi');
+        const fovInput = document.getElementById('fov');
+        const resultText = document.querySelector('.result-text');
+        const renderOutput = document.getElementById('renderOutput');
+
+        // 渲染函数
+        function renderNERF() {
+            const theta = thetaInput.value;
+            const phi = phiInput.value;
+            const fov = fovInput.value;
+
+            resultText.textContent = `渲染结果 - theta: ${theta}，phi: ${phi}，fov: ${fov}`;
+
+            // 计算透视投影的缩放因子
+            const scale = Math.tan((fov / 2) * (Math.PI / 180)) * 2;
+
+            // 更新渲染结果的显示
+            renderOutput.style.transform = `perspective(${fov}px) rotateX(${phi}deg) rotateY(${theta}deg) scale(${scale})`;
+        }
+
+        // 监听参数变化并重新渲染场景
+        thetaInput.addEventListener('input', renderNERF);
+        phiInput.addEventListener('input', renderNERF);
+        fovInput.addEventListener('input', renderNERF);
+
+        // 初始化渲染
+        renderNERF();
+
+    </script>
+</body>
+
+</html>

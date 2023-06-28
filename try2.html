@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>交互式答题</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+
+        .choices {
+            margin-bottom: 20px;
+        }
+
+        .choice {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .feedback {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .analysis {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .analysis h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .analysis-item {
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <h1>交互式答题</h1>
+        <div class="question">
+            <p id="questionText"></p>
+        </div>
+        <div class="choices">
+            <div class="choice">
+                <input type="radio" name="answer" value="0">
+                <label></label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="answer" value="1">
+                <label></label>
+            </div>
+            <div class="choice">
+                <input type="radio" name="answer" value="2">
+                <label></label>
+            </div>
+        </div>
+        <button onclick="checkAnswer()">提交</button>
+        <div class="feedback" id="feedback"></div>
+
+        <div class="analysis" id="analysis">
+            <h2>答题解析</h2>
+            <div class="analysis-container"></div>
+        </div>
+
+        <div class="pagination">
+            <button onclick="prevAnalysis()" id="prevBtn" disabled>&lt; 上一页</button>
+            <button onclick="nextAnalysis()" id="nextBtn">下一页 &gt;</button>
+        </div>
+    </div>
+
+    <script>
+        var questions = [
+            {
+                question: "问题 1: NeRF 是什么的缩写？",
+                choices: [
+                    { text: "A. 神经渲染框架", correct: false },
+                    { text: "B. 神经辐射场", correct: true },
+                    { text: "C. 神经表示函数", correct: false }
+                ],
+                explanation: "NeRF 的全称是神经辐射场（Neural Radiance Fields）。",
+                correctAnswer: "B"
+            },
+            {
+                question: "问题 2: NeRF 的主要目的是什么？",
+                choices: [
+                    { text: "A. 图像分类", correct: false },
+                    { text: "B. 三维场景重建", correct: true },
+                    { text: "C. 自然语言处理", correct: false }
+                ],
+                explanation: "NeRF 的主要目的是进行三维场景重建，允许从有限的输入图像合成新的视角。",
+                correctAnswer: "B"
+            },
+            {
+                question: "问题 3: NeRF 使用哪种类型的神经网络？",
+                choices: [
+                    { text: "A. 卷积神经网络（CNN）", correct: false },
+                    { text: "B. 循环神经网络（RNN）", correct: false },
+                    { text: "C. 多层感知器（MLP）", correct: true }
+                ],
+                explanation: "NeRF 使用多层感知器（MLP）作为神经网络模型。",
+                correctAnswer: "C"
+            },
+            {
+                question: "问题 4: NeRF 中的体绘制（Volume Rendering）是指什么？",
+                choices: [
+                    { text: "A. 从三维数据生成二维图像", correct: true },
+                    { text: "B. 从二维图像创建三维模型", correct: false },
+                    { text: "C. 对渲染图像应用颜色校正", correct: false }
+                ],
+                explanation: "体绘制（Volume Rendering）是指从三维数据生成二维图像的过程。",
+                correctAnswer: "A"
+            },
+            {
+                question: "问题 5: 在 NeRF 训练中使用多个视角的数据有哪些好处？",
+                choices: [
+                    { text: "A. 更高的渲染分辨率", correct: false },
+                    { text: "B. 提高场景表示的准确性和连续性", correct: true },
+                    { text: "C. 更快的渲染速度", correct: false }
+                ],
+                explanation: "使用多个视角的数据可以提高场景表示的准确性和连续性。",
+                correctAnswer: "B"
+            }
+        ];
+
+        var currentQuestionIndex = 0;
+        var analysisContainer = document.querySelector('.analysis-container');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+
+        function displayQuestion() {
+            var questionText = document.getElementById('questionText');
+            questionText.textContent = questions[currentQuestionIndex].question;
+
+            var choicesContainer = document.querySelector('.choices');
+            choicesContainer.innerHTML = '';
+
+            questions[currentQuestionIndex].choices.forEach(function (choice, index) {
+                var choiceDiv = document.createElement('div');
+                choiceDiv.className = 'choice';
+
+                var input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'answer';
+                input.value = index;
+
+                var label = document.createElement('label');
+                label.textContent = choice.text;
+
+                choiceDiv.appendChild(input);
+                choiceDiv.appendChild(label);
+                choicesContainer.appendChild(choiceDiv);
+            });
+
+            var feedback = document.getElementById('feedback');
+            feedback.textContent = '';
+        }
+
+        function checkAnswer() {
+            var selectedAnswer = document.querySelector('input[name="answer"]:checked');
+
+            if (selectedAnswer) {
+                var selectedChoiceIndex = parseInt(selectedAnswer.value);
+                var selectedChoice = questions[currentQuestionIndex].choices[selectedChoiceIndex];
+
+                if (selectedChoice.correct) {
+                    feedback.style.color = 'green';
+                    feedback.textContent = '回答正确！';
+                } else {
+                    feedback.style.color = 'red';
+                    feedback.textContent = '回答错误，请再试一次。';
+                }
+
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < questions.length) {
+                    displayQuestion();
+                } else {
+                    showAnalysis();
+                }
+            } else {
+                feedback.style.color = 'red';
+                feedback.textContent = '请选择一个答案。';
+            }
+        }
+
+        function showAnalysis() {
+            var quizContainer = document.querySelector('.quiz-container');
+            quizContainer.innerHTML = '';
+
+            var analysisHeading = document.createElement('h2');
+            analysisHeading.textContent = '答题解析';
+
+            var analysisContainer = document.createElement('div');
+            analysisContainer.className = 'analysis-container';
+
+            questions.forEach(function (question, index) {
+                var analysisItem = document.createElement('div');
+                analysisItem.className = 'analysis-item';
+                analysisItem.innerHTML = "<p><strong>问题 " + (index + 1) + ": </strong>" + question.explanation + "</p><p><strong>正确答案: </strong>" + question.correctAnswer + "</p>";
+
+                analysisContainer.appendChild(analysisItem);
+            });
+
+            var pagination = document.createElement('div');
+            pagination.className = 'pagination';
+
+            var prevBtn = document.createElement('button');
+            prevBtn.textContent = '< 上一页';
+            prevBtn.onclick = prevAnalysis;
+            prevBtn.disabled = true;
+
+            var nextBtn = document.createElement('button');
+            nextBtn.textContent = '下一页 >';
+            nextBtn.onclick = nextAnalysis;
+
+            pagination.appendChild(prevBtn);
+            pagination.appendChild(nextBtn);
+
+            quizContainer.appendChild(analysisHeading);
+            quizContainer.appendChild(analysisContainer);
+            quizContainer.appendChild(pagination);
+        }
+
+        var analysisItems = document.querySelectorAll('.analysis-item');
+        var currentAnalysisIndex = 0;
+
+        function prevAnalysis() {
+            currentAnalysisIndex--;
+            displayAnalysis(currentAnalysisIndex);
+            updatePaginationButtons();
+        }
+
+        function nextAnalysis() {
+            currentAnalysisIndex++;
+            displayAnalysis(currentAnalysisIndex);
+            updatePaginationButtons();
+        }
+
+        function displayAnalysis(index) {
+            analysisItems.forEach(function (item) {
+                item.style.display = 'none';
+            });
+
+            analysisItems[index].style.display = 'block';
+        }
+
+        function updatePaginationButtons() {
+            prevBtn.disabled = currentAnalysisIndex === 0;
+            nextBtn.disabled = currentAnalysisIndex === analysisItems.length - 1;
+        }
+
+        displayQuestion();
+    </script>
+</body>
+
+</html>

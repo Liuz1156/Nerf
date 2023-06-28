@@ -1,112 +1,21 @@
-<style>
-    .slider-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    .slider-label {
-        margin-right: 10px;
-    }
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/three.css">
+</head>
 
-    .slider {
-        width: 200px;
-        height: 10px;
-        background-color: #ccc;
-        border-radius: 5px;
-        position: relative;
-    }
-
-    .slider-thumb {
-        width: 20px;
-        height: 20px;
-        background-color: #000;
-        border-radius: 50%;
-        position: absolute;
-        top: -5px;
-        cursor: pointer;
-    }
-</style>
-
-<div className="slider-container">
-    <span className="slider-label">质地平滑</span>
-    <div className="slider">
-        <div className="slider-thumb"></div>
-    </div>
-    <span className="slider-label">粗糙</span>
+<body>
+<div id="container">
+    <div id="container1"></div>
+    <div id="container2"></div>
+    <div id="container3"></div>
+    <div id="container4"></div>
 </div>
-
-<div className="slider-container">
-    <span className="slider-label">颜色浅</span>
-    <div className="slider">
-        <div className="slider-thumb"></div>
-    </div>
-    <span className="slider-label">颜色深</span>
-</div>
-
-<div className="slider-container">
-    <span className="slider-label">形状简单</span>
-    <div className="slider">
-        <div className="slider-thumb"></div>
-    </div>
-    <span className="slider-label">形状复杂</span>
-</div>
-
-<div className="slider-container">
-    <span className="slider-label">尺寸小</span>
-    <div className="slider">
-        <div className="slider-thumb"></div>
-    </div>
-    <span className="slider-label">尺寸大</span>
-</div>
-
-<script>
-    var sliders = document.querySelectorAll('.slider');
-    sliders.forEach(function (slider) {
-        var thumb = slider.querySelector('.slider-thumb');
-        var value = 0;
-
-        thumb.addEventListener('mousedown', startDrag);
-        thumb.addEventListener('touchstart', startDrag);
-
-        function startDrag(e) {
-            e.preventDefault();
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('touchmove', drag);
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-        }
-
-        function drag(e) {
-            var sliderRect = slider.getBoundingClientRect();
-            var min = 0;
-            var max = 100;
-            var offsetX = 0;
-
-            if (e.type === 'mousemove') {
-                offsetX = e.clientX - sliderRect.left;
-            } else if (e.type === 'touchmove') {
-                offsetX = e.touches[0].clientX - sliderRect.left;
-            }
-
-            if (offsetX < 0) {
-                offsetX = 0;
-            } else if (offsetX > sliderRect.width) {
-                offsetX = sliderRect.width;
-            }
-
-            var percentage = (offsetX / sliderRect.width) * 100;
-            thumb.style.left = offsetX - (thumb.offsetWidth / 2) + 'px';
-
-            value = Math.round((percentage / 100) * (max - min) + min);
-            console.log('Slider Value:', value);
-        }
-
-        function stopDrag() {
-            document.removeEventListener('mousemove', drag);
-            document.removeEventListener('touchmove', drag);
-            document.removeEventListener('mouseup', stopDrag);
-            document.removeEventListener('touchend', stopDrag);
-        }
-    });
-</script>
+</body>
+<script src="js/three01.js"></script>
+</html>

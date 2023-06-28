@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>交互式答题</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            /*justify-content: center;*/
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+            font-family: Arial, sans-serif;
+        }
+
+        .quiz-container {
+            margin: 100px auto;
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 10px;
+        }
+
+        .choices {
+            margin-bottom: 20px;
+        }
+
+        .choice {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .feedback {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .analysis {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .analysis h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .analysis-item {
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+        }
+        .Btn {
+            /*opacity: 0.95;*/
+            top: 3%;
+            left: 1%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition-duration: .3s;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+            background-color: #95c4db;
+        }
+
+        /* plus sign */
+        .sign {
+            rotate: 180deg;
+            width: 100%;
+            transition-duration: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sign svg {
+            width: 17px;
+        }
+
+        .sign svg path {
+            fill: white;
+        }
+        /* text */
+        .text {
+            position: absolute;
+            right: 0%;
+            width: 0%;
+            opacity: 0;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition-duration: .3s;
+        }
+        /* hover effect on button width */
+        .Btn:hover {
+            width: 125px;
+            border-radius: 40px;
+            transition-duration: .3s;
+        }
+
+        .Btn:hover .sign {
+            width: 30%;
+            transition-duration: .3s;
+            padding-left: 20px;
+        }
+        /* hover effect button's text */
+        .Btn:hover .text {
+            opacity: 1;
+            width: 70%;
+            transition-duration: .3s;
+            padding-right: 10px;
+        }
+        /* button click effect*/
+        .Btn:active {
+            transform: translate(2px ,2px);
+        }
+        #but{
+            width: 98%;
+            /*border: 2px solid red;*/
+            margin: 0 auto;
+            justify-content: space-between;
+            display: flex;
+        }
+        #b2:active {
+            transform: translate(-2px ,2px);
+        }
+        #b2 .sign {
+            rotate: 0deg;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="but">
+    <button class="Btn" onclick="window.location.href = 'two.html';">
+
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+
+        <div class="text">go back</div>
+    </button>
+    <button class="Btn" id="b2" onclick="window.location.href = 'answer.html';">
+
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+
+        <div class="text">next</div>
+    </button>
+</div>
+<div class="quiz-container">
+    <h1>交互式答题</h1>
+    <div class="question">
+        <p id="questionText"></p>
+    </div>
+    <div class="choices">
+        <div class="choice">
+            <input type="radio" name="answer" value="0">
+            <label></label>
+        </div>
+        <div class="choice">
+            <input type="radio" name="answer" value="1">
+            <label></label>
+        </div>
+        <div class="choice">
+            <input type="radio" name="answer" value="2">
+            <label></label>
+        </div>
+    </div>
+    <button onclick="submitAnswer()">提交</button>
+    <div class="feedback" id="feedback"></div>
+
+    <div class="analysis" id="analysis">
+        <h2>答题解析</h2>
+        <div class="analysis-container"></div>
+    </div>
+
+    <div class="pagination">
+        <button onclick="prevQuestion()" id="prevBtn" disabled>&lt; 上一页</button>
+        <button onclick="nextQuestion()" id="nextBtn">下一个 &gt;</button>
+    </div>
+</div>
+
+<script>
+    var questions = [
+        {
+            question: "问题 1: NeRF 是什么的缩写？",
+            choices: [
+                { text: "A. 神经渲染框架", correct: false },
+                { text: "B. 神经辐射场", correct: true },
+                { text: "C. 神经表示函数", correct: false }
+            ],
+            explanation: "NeRF 的全称是神经辐射场（Neural Radiance Fields）。",
+            correctAnswer: "B"
+        },
+        {
+            question: "问题 2: NeRF 的主要目的是什么？",
+            choices: [
+                { text: "A. 图像分类", correct: false },
+                { text: "B. 三维场景重建", correct: true },
+                { text: "C. 自然语言处理", correct: false }
+            ],
+            explanation: "NeRF 的主要目的是进行三维场景重建，允许从有限的输入图像合成新的视角。",
+            correctAnswer: "B"
+        },
+        {
+            question: "问题 3: NeRF 使用哪种类型的神经网络？",
+            choices: [
+                { text: "A. 卷积神经网络（CNN）", correct: false },
+                { text: "B. 循环神经网络（RNN）", correct: false },
+                { text: "C. 多层感知器（MLP）", correct: true }
+            ],
+            explanation: "NeRF 使用多层感知器（MLP）作为神经网络模型。",
+            correctAnswer: "C"
+        },
+        {
+            question: "问题 4: NeRF 中的体绘制（Volume Rendering）是指什么？",
+            choices: [
+                { text: "A. 从三维数据生成二维图像", correct: true },
+                { text: "B. 从二维图像创建三维模型", correct: false },
+                { text: "C. 对渲染图像应用颜色校正", correct: false }
+            ],
+            explanation: "体绘制（Volume Rendering）是指从三维数据生成二维图像的过程。",
+            correctAnswer: "A"
+        },
+        {
+            question: "问题 5: 在 NeRF 训练中使用多个视角的数据有哪些好处？",
+            choices: [
+                { text: "A. 更高的渲染分辨率", correct: false },
+                { text: "B. 提高场景表示的准确性和连续性", correct: true },
+                { text: "C. 更快的渲染速度", correct: false }
+            ],
+            explanation: "使用多个视角的数据可以提高场景表示的准确性和连续性。",
+            correctAnswer: "B"
+        }
+    ];
+
+    var currentQuestionIndex = 0;
+    var analysisContainer = document.querySelector('.analysis-container');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+
+    function displayQuestion() {
+        var questionText = document.getElementById('questionText');
+        questionText.textContent = questions[currentQuestionIndex].question;
+
+        var choicesContainer = document.querySelector('.choices');
+        choicesContainer.innerHTML = '';
+
+        questions[currentQuestionIndex].choices.forEach(function (choice, index) {
+            var choiceDiv = document.createElement('div');
+            choiceDiv.className = 'choice';
+
+            var input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answer';
+            input.value = index;
+
+            var label = document.createElement('label');
+            label.textContent = choice.text;
+
+            choiceDiv.appendChild(input);
+            choiceDiv.appendChild(label);
+
+            choicesContainer.appendChild(choiceDiv);
+        });
+    }
+    var choices = [];
+    var score = 0;
+
+    function submitAnswer() {
+        var choices = document.getElementsByName('answer');
+        var selectedChoice;
+
+        choices.forEach(function (choice) {
+            if (choice.checked) {
+                selectedChoice = choice;
+            }
+        });
+
+        if (!selectedChoice) {
+            return;
+        }
+
+        var feedback = document.getElementById('feedback');
+        var analysis = document.getElementById('analysis');
+
+        // console.log(questions[currentQuestionIndex].correctAnswer)
+
+        var value1 = "";
+        if (selectedChoice.value == 0){
+            value1 = "A";
+        }
+        if (selectedChoice.value == 1){
+            value1 = "B";
+        }
+        if (selectedChoice.value == 2){
+            value1 = "C";
+        }
+
+        choices[currentQuestionIndex] = value1;
+        console.log(choices[currentQuestionIndex])
+
+        if (value1 == questions[currentQuestionIndex].correctAnswer) {
+            score += 20;
+            feedback.textContent = '回答正确！';
+            feedback.style.backgroundColor = '#4caf50';
+        } else {
+            feedback.textContent = '回答错误！';
+            feedback.style.backgroundColor = '#f44336';
+        }
+
+        feedback.style.display = 'block';
+
+        analysisContainer.innerHTML = '';
+        var analysisHeader = document.createElement('h3');
+        analysisHeader.textContent = '解析：';
+        analysisContainer.appendChild(analysisHeader);
+
+        var analysisItem = document.createElement('div');
+        analysisItem.className = 'analysis-item';
+        analysisItem.textContent = questions[currentQuestionIndex].explanation;
+        analysisContainer.appendChild(analysisItem);
+
+        analysis.style.display = 'block';
+
+        if (currentQuestionIndex === questions.length - 1) {
+            nextBtn.textContent = '查看结果';
+            displayResult();
+        }
+
+    }
+
+    function displayResult() {
+        var quizContainer = document.querySelector('.quiz-container');
+        quizContainer.innerHTML = '';
+
+        var resultHeader = document.createElement('h1');
+        resultHeader.textContent = '你的成绩：';
+        quizContainer.appendChild(resultHeader);
+
+        var totalQuestions = questions.length;
+
+        // questions.forEach(function (question) {
+        //     if (question.correctAnswer === choices[question.correctAnswer].value) {
+        //         score++;
+        //     }
+        // });
+
+        var result = document.createElement('p');
+        result.textContent = '得分：' + score + '/' + totalQuestions*20;
+        quizContainer.appendChild(result);
+    }
+
+    function prevQuestion() {
+        currentQuestionIndex--;
+
+        if (currentQuestionIndex === 0) {
+            prevBtn.disabled = true;
+        }
+
+        nextBtn.textContent = '下一个 &gt;';
+
+        displayQuestion();
+    }
+
+    function nextQuestion() {
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex === questions.length - 1) {
+                nextBtn.textContent = '提交';
+            }
+
+            if (prevBtn.disabled) {
+                prevBtn.disabled = false;
+            }
+
+            displayQuestion();
+        } else {
+            submitAnswer();
+        }
+    }
+
+    displayQuestion();
+
+</script>
+</body>
+
+</html>
