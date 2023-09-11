@@ -221,8 +221,7 @@ function sleep(ms) {
 
 
 var ai = document.getElementById("ai");
-var header = document.getElementById("header");
-var header1 = document.getElementById("header1")
+var header = document.getElementById("header")
 
 ai.addEventListener("click", async function () {
     if (sliderValues.size != sliders.length){
@@ -234,10 +233,10 @@ ai.addEventListener("click", async function () {
             draw2();
             if (total >= 200){
                 console.log("020202")
-                header1.src = "/img/test01s.jpg"
+                header.style.backgroundImage = "url('/img/test01s.jpg')"
             }else {
                 console.log("01111111111")
-                header1.src = "/img/test02s.jpg"
+                header.style.backgroundImage = "url('/img/test02s.jpg')"
             }
         }
     }
