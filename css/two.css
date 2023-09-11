@@ -45,6 +45,7 @@ body {
 }
 #im{
     display: flex;
+    margin: 10px auto;
 }
 .card:hover {
     transform: scaleX(1.4) scaleY(1.5) ;
