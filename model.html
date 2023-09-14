@@ -19,40 +19,40 @@
 
         model-viewer {
 
-          width: 400px;
-          height: 600px;
-      }
-      .modelbt {
-          background-color: white;
-          color: black;
-          border-radius: 1em;
-          font-size: 17px;
-          font-weight: 600;
-          padding: 1em 2em;
-          cursor: pointer;
-          transition: all 0.3s ease-in-out;
-          border: 1px solid black;
-          box-shadow: 0 0 0 0 black;
-          width: 1em;
-      }
+            width: 400px;
+            height: 600px;
+        }
+        .modelbt {
+            background-color: white;
+            color: black;
+            border-radius: 1em;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 1em 2em;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid black;
+            box-shadow: 0 0 0 0 black;
+            width: 1em;
+        }
 
-      .modelbt:hover {
-          transform: translateY(-4px) translateX(-2px);
-          box-shadow: 2px 5px 0 0 black;
-      }
+        .modelbt:hover {
+            transform: translateY(-4px) translateX(-2px);
+            box-shadow: 2px 5px 0 0 black;
+        }
 
-      .modelbt:active {
-          transform: translateY(2px) translateX(1px);
-          box-shadow: 0 0 0 0 black;
-      }
-      #modelshower{
-          display: flex;
-          flex-direction:row ;
-      }
-      #button{
-          display: flex;
-          flex-direction:column;
-      }
+        .modelbt:active {
+            transform: translateY(2px) translateX(1px);
+            box-shadow: 0 0 0 0 black;
+        }
+        #modelshower{
+            display: flex;
+            flex-direction:row ;
+        }
+        #button{
+            display: flex;
+            flex-direction:column;
+        }
 
         .carousel-container {
             z-index:2;
@@ -206,6 +206,7 @@
         <div class="text">go back</div>
     </button>
     <div style="font-weight: bold; font-size: 25px; color: #ffffff; background-color: #51c4fc; border-radius: 0.25em; padding: 0px 10px" >Nerf原理</div>
+    <div style="font-size: 25px; ">点击右侧视图，左边模型自动跳转到该视图</div>
     <button class="Btn" id="b2" onclick="window.location.href = 'squre.html';">
 
         <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
@@ -214,21 +215,21 @@
     </button>
 </div>
 <div id="modelshower">
-<div id="model">
-    <model-viewer class="tabs__active___8IvFf modelViewer"
-                  src="obj/test04.glb" alt="A 3D model of a robot"
-                  background-color="#455A64"
-                  shadow-intensity="0.7" exposure="1.8" data-js-focus-visible="true" disable-zoom disable-tap
-                  interaction-policy="always-allow" camera-orbit="35deg 90deg 100%"
-                  loading preload="true" max-field-of-view="auto" reveal="auto"
-                  range-request-strategy="performance" ar-status="not-presenting"></model-viewer>
-    </model-viewer>
+    <div id="model">
+        <model-viewer class="tabs__active___8IvFf modelViewer"
+                      src="obj/test04.glb" alt="A 3D model of a robot"
+                      background-color="#455A64"
+                      shadow-intensity="0.7" exposure="1.8" data-js-focus-visible="true" disable-zoom disable-tap
+                      interaction-policy="always-allow" camera-orbit="35deg 90deg 100%"
+                      loading preload="true" max-field-of-view="auto" reveal="auto"
+                      range-request-strategy="performance" ar-status="not-presenting"></model-viewer>
+        </model-viewer>
 
-    <!-- Loads model-viewer for modern browsers -->
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
-    <!-- Loads model-viewer for older browsers -->
-    <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
-</div>
+        <!-- Loads model-viewer for modern browsers -->
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js"></script>
+        <!-- Loads model-viewer for older browsers -->
+        <script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+    </div>
 
 
     <div class="carousel-container">
@@ -241,7 +242,7 @@
             <div class="carousel-item" data-index="6" onclick="rotateToItem(this);model_down()" id="carousel-item-6"></div>
         </div>
     </div>
-    </div>
+</div>
 </body>
 <script type="text/javascript">
     function model_left(){
